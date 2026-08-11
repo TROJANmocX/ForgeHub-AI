@@ -1,0 +1,92 @@
+{
+  "urn": "urn:li:dataset:(urn:li:dataPlatform:bigquery,retail.customers,PROD)",
+  "name": "retail.customers",
+  "platform": "bigquery",
+  "environment": "PROD",
+  "description": "Customer dimension table. One row per registered customer. Contains PII fields.",
+  "owners": ["data-privacy@company.com", "data-engineering@company.com"],
+  "domains": ["commerce", "identity"],
+  "glossary_terms": ["Customer"],
+  "tags": ["pii", "raw", "commerce"],
+  "upstream_datasets": [],
+  "downstream_datasets": [],
+  "custom_properties": {
+    "data_classification": "restricted",
+    "retention_policy": "7_years"
+  },
+  "columns": [
+    {
+      "name": "customer_id",
+      "data_type": "STRING",
+      "description": "Unique customer identifier.",
+      "glossary_terms": ["Customer ID"],
+      "tags": [],
+      "nullable": false,
+      "is_primary_key": true,
+      "is_foreign_key": false,
+      "semantic_type": "identifier",
+      "pii": false
+    },
+    {
+      "name": "first_name",
+      "data_type": "STRING",
+      "description": "Customer first name.",
+      "glossary_terms": [],
+      "tags": ["pii"],
+      "nullable": false,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": "text",
+      "pii": true
+    },
+    {
+      "name": "last_name",
+      "data_type": "STRING",
+      "description": "Customer last name.",
+      "glossary_terms": [],
+      "tags": ["pii"],
+      "nullable": false,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": "text",
+      "pii": true
+    },
+    {
+      "name": "email",
+      "data_type": "STRING",
+      "description": "Customer email address.",
+      "glossary_terms": [],
+      "tags": ["pii"],
+      "nullable": true,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": "email",
+      "pii": true
+    },
+    {
+      "name": "country_code",
+      "data_type": "STRING",
+      "description": null,
+      "glossary_terms": [],
+      "tags": [],
+      "nullable": true,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": null,
+      "pii": false,
+      "_demo_gap": "AMBIGUOUS_SEMANTIC_TYPE — country_code is undocumented. Could be ISO 3166-1 alpha-2 or internal code."
+    },
+    {
+      "name": "signup_date",
+      "data_type": "DATE",
+      "description": "Date the customer registered.",
+      "glossary_terms": [],
+      "tags": [],
+      "nullable": false,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": "date",
+      "pii": false
+    }
+  ]
+}

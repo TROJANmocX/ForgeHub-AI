@@ -1,0 +1,92 @@
+{
+  "urn": "urn:li:dataset:(urn:li:dataPlatform:bigquery,retail.orders,PROD)",
+  "name": "retail.orders",
+  "platform": "bigquery",
+  "environment": "PROD",
+  "description": "Raw orders transactional table. One row per order placed by a customer. Updated nightly via batch ETL from the commerce backend.",
+  "owners": ["data-engineering@company.com"],
+  "domains": ["commerce"],
+  "glossary_terms": ["Order", "Revenue"],
+  "tags": ["raw", "commerce", "nightly-batch"],
+  "upstream_datasets": [],
+  "downstream_datasets": [],
+  "custom_properties": {
+    "update_frequency": "nightly",
+    "data_classification": "internal"
+  },
+  "columns": [
+    {
+      "name": "order_id",
+      "data_type": "STRING",
+      "description": "Unique identifier for each order.",
+      "glossary_terms": ["Order ID"],
+      "tags": [],
+      "nullable": false,
+      "is_primary_key": true,
+      "is_foreign_key": false,
+      "semantic_type": "identifier",
+      "pii": false
+    },
+    {
+      "name": "customer_id",
+      "data_type": "STRING",
+      "description": "Foreign key to the customers table.",
+      "glossary_terms": ["Customer ID"],
+      "tags": [],
+      "nullable": false,
+      "is_primary_key": false,
+      "is_foreign_key": true,
+      "semantic_type": "identifier",
+      "pii": false
+    },
+    {
+      "name": "order_date",
+      "data_type": "DATE",
+      "description": "Date the order was placed.",
+      "glossary_terms": [],
+      "tags": [],
+      "nullable": false,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": "date",
+      "pii": false
+    },
+    {
+      "name": "quantity",
+      "data_type": "INTEGER",
+      "description": "Number of units ordered.",
+      "glossary_terms": ["Order Quantity"],
+      "tags": [],
+      "nullable": false,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": "quantity",
+      "pii": false
+    },
+    {
+      "name": "unit_price",
+      "data_type": "NUMERIC",
+      "description": "Price per unit at time of order.",
+      "glossary_terms": [],
+      "tags": [],
+      "nullable": false,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": null,
+      "pii": false,
+      "_demo_gap": "UNDEFINED_CURRENCY — currency unit not specified in metadata"
+    },
+    {
+      "name": "status",
+      "data_type": "STRING",
+      "description": "Order fulfillment status.",
+      "glossary_terms": ["Order Status"],
+      "tags": [],
+      "nullable": false,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": "category",
+      "pii": false
+    }
+  ]
+}

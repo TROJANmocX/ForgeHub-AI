@@ -1,0 +1,64 @@
+# ─── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+MANIFEST
+
+# ─── Virtual environments ─────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.env
+*.env
+
+# ─── IDE / Editor ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ─── Testing / Coverage ───────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+junit.xml
+coverage.xml
+
+# ─── Node / Frontend ─────────────────────────────────────────────────────────
+node_modules/
+dist/
+.cache/
+*.tsbuildinfo
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ─── Docker ──────────────────────────────────────────────────────────────────
+.dockerignore
+
+# ─── Secrets / Credentials ───────────────────────────────────────────────────
+*.pem
+*.key
+secrets/
+
+# ─── Temporary / scratch files ───────────────────────────────────────────────
+backend/test_generate_endpoint.py
+*.tmp
+*.bak
+
+# ─── OS ──────────────────────────────────────────────────────────────────────
+.DS_Store
+ehthumbs.db
+Desktop.ini

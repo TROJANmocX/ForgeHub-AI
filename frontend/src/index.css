@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    cursor: default;
+  }
+  
+  button, a, input, select, textarea {
+    cursor: pointer;
+  }
+
+  body {
+    @apply bg-zinc-950 text-slate-100 font-sans antialiased min-h-screen overflow-x-hidden;
+    background-color: #09090b;
+  }
+}
+
+/* Comic / Pop Fonts */
+.font-comic {
+  font-family: 'Bangers', cursive, sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.font-heading {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Halftone / Comic Dot pattern */
+.comic-dots {
+  background-image: radial-gradient(#27272a 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.comic-dots-red {
+  background-image: radial-gradient(#7f1d1d 2px, transparent 2px);
+  background-size: 20px 20px;
+}
+
+/* Pop Neo-Brutalist Shadow Effects */
+.shadow-pop {
+  box-shadow: 5px 5px 0px #000000;
+}
+
+.shadow-pop-red {
+  box-shadow: 5px 5px 0px #ef4444;
+}
+
+.shadow-pop-yellow {
+  box-shadow: 5px 5px 0px #eab308;
+}
+
+.shadow-pop-cyan {
+  box-shadow: 5px 5px 0px #06b6d4;
+}
+
+.shadow-pop-white {
+  box-shadow: 5px 5px 0px #ffffff;
+}
+
+.shadow-pop-lg {
+  box-shadow: 8px 8px 0px #000000;
+}
+
+/* Comic Badge Sticker Tilt */
+.comic-sticker {
+  transform: rotate(-2deg);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comic-sticker:hover {
+  transform: rotate(1deg) scale(1.04);
+}
+
+/* Speech Bubble Tail */
+.speech-bubble {
+  position: relative;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 24px;
+  border-width: 10px 10px 0 0;
+  border-style: solid;
+  border-color: #f43f5e transparent transparent transparent;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border: 2px solid #000000;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #eab308;
+}

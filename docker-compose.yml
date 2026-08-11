@@ -1,0 +1,52 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# ForgeHub AI — Docker Compose
+# Runs the full stack (backend API + frontend) with a single command.
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+  # ── FastAPI backend ──────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: forgehub-backend
+    restart: unless-stopped
+    environment:
+      - DEMO_MODE=${DEMO_MODE:-true}
+      - LLM_PROVIDER=${LLM_PROVIDER:-mock}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - DATAHUB_URL=${DATAHUB_URL:-http://localhost:8080}
+      - DATAHUB_TOKEN=${DATAHUB_TOKEN:-}
+      - MAX_REPAIR_ATTEMPTS=${MAX_REPAIR_ATTEMPTS:-3}
+      - FRONTEND_ORIGIN=http://localhost:80
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    networks:
+      - forgehub
+
+  # ── Vite/React frontend (Nginx) ───────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: forgehub-frontend
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-80}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - forgehub
+
+networks:
+  forgehub:
+    driver: bridge

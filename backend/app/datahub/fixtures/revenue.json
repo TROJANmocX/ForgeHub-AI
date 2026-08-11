@@ -1,0 +1,82 @@
+{
+  "urn": "urn:li:dataset:(urn:li:dataPlatform:bigquery,retail.revenue,PROD)",
+  "name": "retail.revenue",
+  "platform": "bigquery",
+  "environment": "PROD",
+  "description": "Daily revenue aggregation table. One row per order-date. Includes promotional discounts.",
+  "owners": ["finance@company.com"],
+  "domains": ["finance"],
+  "glossary_terms": ["Revenue", "Discount"],
+  "tags": ["financial", "daily-batch"],
+  "upstream_datasets": [
+    "urn:li:dataset:(urn:li:dataPlatform:bigquery,retail.orders,PROD)"
+  ],
+  "downstream_datasets": [],
+  "custom_properties": {
+    "update_frequency": "daily"
+  },
+  "columns": [
+    {
+      "name": "order_date",
+      "data_type": "DATE",
+      "description": "Date of the orders being aggregated.",
+      "glossary_terms": [],
+      "tags": [],
+      "nullable": false,
+      "is_primary_key": true,
+      "is_foreign_key": false,
+      "semantic_type": "date",
+      "pii": false
+    },
+    {
+      "name": "gross_revenue",
+      "data_type": "NUMERIC",
+      "description": "Total gross revenue before discounts.",
+      "glossary_terms": ["Revenue"],
+      "tags": [],
+      "nullable": false,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": null,
+      "pii": false,
+      "_demo_gap": "UNDEFINED_CURRENCY — currency unit ambiguous. Could be USD or multi-currency."
+    },
+    {
+      "name": "discount_amount",
+      "data_type": "NUMERIC",
+      "description": "Total promotional discount applied.",
+      "glossary_terms": ["Discount"],
+      "tags": [],
+      "nullable": true,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": null,
+      "pii": false,
+      "_demo_gap": "UNDEFINED_CURRENCY — discount currency unit not specified"
+    },
+    {
+      "name": "discount_rate",
+      "data_type": "NUMERIC",
+      "description": "Average discount rate as a decimal fraction.",
+      "glossary_terms": ["Discount Rate"],
+      "tags": [],
+      "nullable": true,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": "percentage",
+      "pii": false
+    },
+    {
+      "name": "order_count",
+      "data_type": "INTEGER",
+      "description": "Number of orders on this date.",
+      "glossary_terms": [],
+      "tags": [],
+      "nullable": false,
+      "is_primary_key": false,
+      "is_foreign_key": false,
+      "semantic_type": "quantity",
+      "pii": false
+    }
+  ]
+}
