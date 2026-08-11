@@ -20,13 +20,24 @@ app = FastAPI(
 )
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
+# On Vercel, frontend and backend are on the same domain so CORS isn't an issue
+# for same-origin calls. Extra origins listed for local dev and preview deploys.
+_origins = [
+    settings.frontend_origin,
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://localhost:80",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.frontend_origin, "http://localhost:5173", "http://localhost:3000"],
+    allow_origins=_origins,
+    allow_origin_regex=r"https://.*\.vercel\.app",  # all Vercel preview + prod URLs
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # ── Routers ───────────────────────────────────────────────────────────────────
 app.include_router(datasets.router)
