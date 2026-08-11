@@ -3,7 +3,7 @@ ForgeHub AI — FastAPI Application Entry Point
 """
 from __future__ import annotations
 
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api import datasets, generation, publish, validation
@@ -40,6 +40,14 @@ app.add_middleware(
 
 
 # ── Routers ───────────────────────────────────────────────────────────────────
+# Mount routers at both root and /api prefix for compatibility across all environments
+api_router = APIRouter(prefix="/api")
+api_router.include_router(datasets.router)
+api_router.include_router(generation.router)
+api_router.include_router(validation.router)
+api_router.include_router(publish.router)
+
+app.include_router(api_router)
 app.include_router(datasets.router)
 app.include_router(generation.router)
 app.include_router(validation.router)
@@ -47,6 +55,7 @@ app.include_router(publish.router)
 
 
 @app.get("/health", tags=["health"])
+@app.get("/api/health", tags=["health"])
 def health():
     return {
         "status": "ok",
@@ -54,3 +63,4 @@ def health():
         "llm_provider": settings.llm_provider,
         "version": "1.0.0",
     }
+
